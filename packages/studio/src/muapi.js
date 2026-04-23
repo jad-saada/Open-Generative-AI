@@ -115,6 +115,18 @@ export async function generateI2V(apiKey, params) {
     return submitAndPoll(endpoint, payload, apiKey, params.onRequestId, 900);
 }
 
+export async function generateMarketingStudioAd(apiKey, params) {
+    const endpoint = params.resolution === '1080p' ? 'sd-2-vip-omni-reference-1080p' : 'seedance-2-vip-omni-reference';
+    const payload = {
+        prompt: params.prompt,
+        aspect_ratio: params.aspect_ratio || '16:9',
+        duration: params.duration || 5,
+        images_list: params.images_list || [],
+        video_files: params.video_files || []
+    };
+    return submitAndPoll(endpoint, payload, apiKey, params.onRequestId, 900);
+}
+
 export async function processLipSync(apiKey, params) {
     const modelInfo = getLipSyncModelById(params.model);
     const endpoint = modelInfo?.endpoint || params.model;
